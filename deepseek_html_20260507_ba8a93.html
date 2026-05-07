@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Rahmet Recai | International Business Affairs Specialist | Digital Card</title>
+    <!-- Google Fonts + modern reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 20%, #eef2f7, #cdd5e0);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        /* animated glassmorphism background accent */
+        body::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.1"><path fill="%234A6FA5" d="M45.3,-72.9C58.9,-63.2,70.1,-48.1,74.8,-31.4C79.5,-14.7,77.7,3.6,71.9,20.7C66.1,37.8,56.2,53.8,42.9,63.6C29.7,73.4,13.2,77.1,-2.6,76.3C-18.4,75.5,-33.6,70.2,-46,59.9C-58.4,49.6,-68,34.3,-74.2,16.9C-80.4,-0.5,-83.2,-20,-76.9,-36.2C-70.6,-52.4,-55.1,-65.3,-38.8,-73.7C-22.5,-82.1,-5.2,-86,9.1,-81.4C23.4,-76.8,31.8,-82.5,45.3,-72.9Z" transform="translate(100 100) scale(0.8)"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        /* main interactive card — it's a real web link (anchor) */
+        .digital-card-link {
+            text-decoration: none;
+            display: block;
+            max-width: 860px;
+            width: 100%;
+            transition: transform 0.28s ease, box-shadow 0.35s ease;
+            cursor: pointer;
+            border-radius: 48px;
+        }
+
+        .digital-card-link:hover {
+            transform: translateY(-6px);
+        }
+
+        /* actual card container (styled element) */
+        .digital-card {
+            background: #ffffff;
+            border-radius: 48px;
+            box-shadow: 0 25px 45px -18px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255,255,255,0.5), inset 0 1px 1px rgba(0,0,0,0.02);
+            overflow: hidden;
+            backdrop-filter: blur(0px);
+            transition: box-shadow 0.2s;
+        }
+
+        .digital-card-link:hover .digital-card {
+            box-shadow: 0 32px 55px -20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0,0,0,0.03);
+        }
+
+        /* elegant stripe inspired by modern turkish motif */
+        .accent-stripe {
+            height: 7px;
+            background: linear-gradient(90deg, #B43B2A 0%, #E8AB3D 30%, #2C6E5C 70%, #B43B2A 100%);
+        }
+
+        /* main interior padding */
+        .card-content {
+            padding: 2.2rem 2.6rem 2rem 2.6rem;
+        }
+
+        /* header: logo and company area */
+        .brand-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.6rem;
+            border-bottom: 2px solid #f0f3f9;
+            padding-bottom: 1.2rem;
+        }
+
+        .company h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+            background: linear-gradient(135deg, #1C2E44, #2B4B6E);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .company .company-sub {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #5A6F84;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .modern-badge {
+            background: #f0f6fa;
+            padding: 0.45rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #226653;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(2px);
+            border: 1px solid #deeaf1;
+        }
+
+        .modern-badge i {
+            font-size: 0.85rem;
+        }
+
+        /* Profile area: name + new title */
+        .profile {
+            margin-bottom: 2rem;
+        }
+
+        .profile-name {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #0F202F;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            display: inline-flex;
+            align-items: center;
+            background: #EFF4FC;
+            padding: 0.5rem 1.4rem;
+            border-radius: 48px;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1D4F5A;
+            margin-top: 0.3rem;
+            gap: 10px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .profile-title i {
+            font-size: 1rem;
+            color: #D97846;
+        }
+
+        .expertise-tags {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .expertise-tags span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            background: #F7F9FD;
+            padding: 0.25rem 0.8rem;
+            border-radius: 24px;
+            color: #3E6B7C;
+            letter-spacing: 0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #E7EDF4;
+        }
+
+        /* contact grid - 2 columns */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.4rem 2rem;
+            margin-bottom: 2rem;
+            background: #FBFDFF;
+            padding: 1.4rem 1.2rem;
+            border-radius: 32px;
+            border: 1px solid #EAF0F6;
+            transition: all 0.2s;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.94rem;
+            color: #1C2F44;
+        }
+
+        .info-item i {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #C76A3C;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02), 0 0 0 1px #E2E9F0;
+            transition: 0.2s;
+        }
+
+        .info-item a {
+            text-decoration: none;
+            color: #1F3A4B;
+            font-weight: 500;
+            transition: color 0.2s;
+            word-break: break-word;
+        }
+
+        /* link hover effect inside card */
+        .info-item a:hover {
+            color: #D9692E;
+        }
+
+        .info-text {
+            line-height: 1.4;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            color: #7D8E9F;
+            margin-bottom: 3px;
+        }
+
+        .address-detail {
+            font-size: 0.86rem;
+            line-height: 1.45;
+            color: #1e2f3c;
+        }
+
+        /* call to action & QR area */
+        .action-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid #EAF0F6;
+            padding-top: 1.4rem;
+            margin-top: 0.2rem;
+        }
+
+        .web-link {
+            background: #F4F8FE;
+            padding: 0.55rem 1.2rem;
+            border-radius: 48px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .web-link span {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2B5F6B;
+        }
+
+        .web-link span i {
+            font-size: 1rem;
+        }
+
+        .web-link:hover {
+            background: #EAEFF7;
+            transform: scale(0.98);
+        }
+
+        .qr-note {
+            font-size: 0.7rem;
+            color: #8D9EB0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #F7FAFE;
+            padding: 0.3rem 1rem;
+            border-radius: 100px;
+        }
+
+        .footer-note {
+            text-align: center;
+            background: #FCFDFF;
+            padding: 0.9rem;
+            font-size: 0.68rem;
+            color: #A1B3C6;
+            border-top: 1px solid #E9EFF5;
+            letter-spacing: 0.4px;
+        }
+
+        /* responsiveness */
+        @media (max-width: 640px) {
+            .card-content {
+                padding: 1.6rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .profile-name {
+                font-size: 1.9rem;
+            }
+            .brand-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .action-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* subtle interactive effect when clicking card itself (ripple-like) */
+        .digital-card-link:active .digital-card {
+            transform: scale(0.99);
+            transition: transform 0.08s;
+        }
+        
+        /* additional styling for the integrated company website link inside card -> also points to tekniktestere.com */
+        .company-site-link {
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .fa-external-link-alt {
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        ENTIRE DIGITAL BUSINESS CARD IS A FUNCTIONAL WEB LINK 
+        The main anchor redirects to https://tekniktestere.com (target _blank for better UX)
+        Also inner interactive links (email, phone, map, etc) are preserved, they will not conflict
+        because they have their own click handlers, but the main card also works as direct link.
+        We use a wrapper <a> to make the whole card clickable BUT we prevent event bubbling on 
+        internal interactive elements (email, phone, whatsapp, directions, website button) so they work independently.
+    -->
+    <a href="https://tekniktestere.com" target="_blank" rel="noopener noreferrer" class="digital-card-link" id="mainCardLink">
+        <div class="digital-card">
+            <div class="accent-stripe"></div>
+            <div class="card-content">
+                <!-- header with brand -->
+                <div class="brand-section">
+                    <div class="company">
+                        <h1>TEKNİK TESTERE A.Ş</h1>
+                        <div class="company-sub">Precision Cutting · Industrial Expertise · Global Trade</div>
+                    </div>
+                    <div class="modern-badge">
+                        <i class="fas fa-globe-americas"></i> <span>Worldwide Relations</span>
+                    </div>
+                </div>
+
+                <!-- profile: name + new role -->
+                <div class="profile">
+                    <div class="profile-name">Rahmet Recai</div>
+                    <div class="profile-title">
+                        <i class="fas fa-chart-network"></i> International Business Affairs Specialist
+                    </div>
+                    <div class="expertise-tags">
+                        <span><i class="fas fa-handshake"></i> Strategic Alliances</span>
+                        <span><i class="fas fa-file-signature"></i> Cross-border Trade</span>
+                        <span><i class="fas fa-chart-line"></i> Market Intelligence</span>
+                    </div>
+                </div>
+
+                <!-- contact grid: email, phone, website (corrected to tekniktestere.com) , address  -->
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div class="info-text">
+                            <div class="info-label">E-Mail</div>
+                            <a href="mailto:rahmet@tekniktestere.com.tr" class="card-internal-link">rahmet@tekniktestere.com.tr</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div class="info-text">
+                            <div class="info-label">Phone & WhatsApp</div>
+                            <a href="tel:+905323058243" class="card-internal-link">+90 532 305 82 43</a>
+                            <span style="font-size: 0.7rem; margin-left: 4px;"><i class="fab fa-whatsapp" style="color:#27aa60;"></i></span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-link"></i>
+                        <div class="info-text">
+                            <div class="info-label">Official Website</div>
+                            <!-- Explicitly points to tekniktestere.com (as requested) -->
+                            <a href="https://tekniktestere.com" target="_blank" class="card-internal-link" id="siteLink">tekniktestere.com</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-building"></i>
+                        <div class="info-text">
+                            <div class="info-label">Headquarters</div>
+                            <div class="address-detail">
+                                Arap Camii Neighbourhood, Bakır St. Aslan Han No: 1<br>
+                                Floor 5, Office 505 · Karaköy/İstanbul - Türkiye
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- extra actions (still interactive) -->
+                <div class="action-links">
+                    <div class="web-link">
+                        <span><i class="fas fa-globe"></i> <span>Company Portal</span></span>
+                    </div>
+                    <div class="web-link" id="mapLinkWrapper">
+                        <span><i class="fas fa-map-pin"></i> <span>Office on Map</span></span>
+                    </div>
+                    <div class="qr-note">
+                        <i class="fas fa-id-card"></i> <span>vCard • digital identity</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-note">
+                <i class="fas fa-briefcase"></i> Rahmet Recai — International Business Affairs Specialist | Teknik Testere A.Ş
+            </div>
+        </div>
+    </a>
+
+    <script>
+        (function() {
+            // MAIN GOAL: Whole card is wrapped in <a href="https://tekniktestere.com"> but we need internal interactive links (email, tel, map, website link inside grid, etc.)
+            // to not trigger the parent link when clicked. So we stop propagation for all interactive elements that have own href or own behaviour.
+            // Also we keep the website link inside grid working independently, plus map link custom behaviour.
+            
+            const mainCardLink = document.getElementById('mainCardLink');
+            // collect all internal interactive selectors
+            const interactiveSelectors = [
+                'a[href^="mailto:"]',
+                'a[href^="tel:"]',
+                'a[href^="https://tekniktestere.com"]', // inner website link
+                '#siteLink', // explicit
+                '.web-link', // both "Company Portal" and map wrapper - we need to add custom click for map
+                '#mapLinkWrapper'
+            ];
+            
+            // Helper to prevent parent link activation
+            function preventParentLink(event) {
+                if(event.stopPropagation) {
+                    event.stopPropagation();
+                }
+                // Also prevent default only if needed but we let the inner link's own navigation work.
+                // We don't want the main card anchor to fire when clicking children.
+                event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+                return false;
+            }
+            
+            // For each internal link, attach event to stop propagation to parent anchor
+            const allInternalAnchors = document.querySelectorAll('.card-internal-link, a[href^="mailto:"], a[href^="tel:"], a[href^="https://tekniktestere.com"]');
+            allInternalAnchors.forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    e.stopPropagation();  // parent anchor won't navigate
+                    // allow actual href navigation
+                    return true;
+                });
+            });
+            
+            // process 'web-link' blocks: first block is just decorative info but we want to redirect to tekniktestere.com? Actually it's just a span, but to be consistent: 
+            // The first web-link (Company Portal) could also go to website when clicked, but the whole card does that. However for user clarity we also make the "Company Portal" span open website without triggering parent?
+            // But since parent link already leads to website, we need to avoid double navigation. Let's improve: we'll keep the parent card link active, but when user clicks on "Company Portal" area we will still navigate to website but not cause double navigation.
+            // Simpler: The parent link covers main area and navigating to website. For internal actions we stop propagation. The "Company Portal" block we want to ALSO link to website without bubbling -> we'll add a specific click handler.
+            const portalBlock = document.querySelector('.web-link:first-child');
+            if(portalBlock) {
+                portalBlock.style.cursor = 'pointer';
+                portalBlock.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    window.open('https://tekniktestere.com', '_blank');
+                });
+            }
+            
+            // Map link: open google maps with address
+            const mapBlock = document.getElementById('mapLinkWrapper');
+            if(mapBlock) {
+                mapBlock.style.cursor = 'pointer';
+                mapBlock.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const address = encodeURIComponent('Arap Camii Neighbourhood, Bakır St. Aslan Han No:1 Floor:5 Office:505 Karaköy/İstanbul Turkey');
+                    window.open(`https://www.google.com/maps/search/?api=1&query=${address}`, '_blank');
+                });
+            }
+            
+            // Also for the inner website link (tekniktestere.com) ensure it doesn't double-navigate: already stops propagation.
+            // Additionally, we need to prevent any accidental double click on the main card link while internal ones are clicked.
+            // Also for the .qr-note we can allow default (just harmless). Add stop propagation for the whole .action-links areas that might cause double.
+            const actionItems = document.querySelectorAll('.web-link, .qr-note');
+            actionItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+            
+            // Additionally, ensure main card link doesn't get triggered when clicking on info-item icons or text that might have no explicit link? But that's fine: they would navigate to website.
+            // But we want internal email/phone to work, already handled.
+            // also address area shouldn't trigger map double? It's fine, it's not interactive link; would go to website, but we can also add if someone clicks address do nothing special? not needed.
+            // For perfect UX we also add stopProp for all .info-item that have a link inside? Actually if there is no inner anchor, it's okay that main link triggers website.
+            // However best: we want the entire card to be company website link, but email and phone to work as expected.
+            // We also need to adjust so that the ".info-item" area which does NOT contain a clickable anchor but user might click on icon (email icon) will bubble to main link (which is fine, they go to website)
+            // That is expected and provides extra discoverability.
+            
+            // One more edge: the 'website' field now explicitly shows tekniktestere.com and opens that domain in a new tab without redirecting the main link due to stopPropagation.
+            console.log('Digital business card active — main wrapper links to tekniktestere.com, inner contacts functional');
+            
+            // set custom attribute for accessibility (optional)
+            const mainLink = document.getElementById('mainCardLink');
+            if(mainLink) {
+                mainLink.setAttribute('aria-label', 'Visit Teknik Testere official website – Digital business card of Rahmet Recai');
+            }
+            
+            // Additional: Fix any overlapping issue on mobile: make sure tap targets inside stop immediate propagation
+            const allActionButtons = document.querySelectorAll('.web-link, .card-internal-link, a[href^="tel"], a[href^="mailto"], #siteLink');
+            allActionButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+            
+            // For the main card link: if any child with stopPropagation triggers, it's fine. We also want to open the website when background clicked.
+            // Ensure that the main link does not open in the same tab (target="_blank" defined). Good.
+            
+            // Because anchor is used as wrapper, we must ensure any child text selection does not interfere — it's fine.
+            // Also correct the secondary link inside action links: "Company Portal" now opens same website but stopping propagation.
+        })();
+    </script>
+</body>
+</html>
